@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>دليل فعاليات المدينة</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<header>
+  <div class="container header-inner">
+    <div class="logo">دليل فعاليات المدينة</div>
+    <nav class="navbar-small">
+      <a href="index.html">الرئيسية</a>
+      <a href="events.html">الفعاليات</a>
+      <a href="about.html">عن الدليل</a>
+      <a href="contact.html">اتصل بنا</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <section class="hero my-4">
+    <div class="carousel card">
+      <img src="assets/img/event1.jpg" alt="فعاليات بارزة">
+      <div class="caption">
+        <strong>مهرجان الموسيقى الصيفي</strong><br/>
+        السبت 12 أكتوبر • المدينة الرئيسية
+      </div>
+    </div>
+  </section>
+  <section class="my-4">
+    <h2>التصنيفات</h2>
+    <div class="d-flex gap-2 flex-wrap">
+      <button class="badge" onclick="filterByCategory('الكل')">الكل</button>
+      <button class="badge" onclick="filterByCategory('ثقافة')">ثقافة</button>
+      <button class="badge" onclick="filterByCategory('رياضة')">رياضة</button>
+      <button class="badge" onclick="filterByCategory('موسيقى')">موسيقى</button>
+      <button class="badge" onclick="filterByCategory('عائلي')">عائلي</button>
+    </div>
+  </section>
+  <section class="my-4">
+    <h2>أحدث الفعاليات</h2>
+    <div class="grid">
+      <div class="card event-card" data-cat="موسيقى">
+        <img src="assets/img/event1.jpg" alt="مهرجان">
+        <div class="card-body">
+          <h3>مهرجان الموسيقى الصيفي</h3>
+          <p class="small-note">السبت 12 أكتوبر • المدينة الرئيسية</p>
+          <a class="btn-primary" href="event.html">التفاصيل</a>
+        </div>
+      </div>
+      <div class="card event-card" data-cat="ثقافة">
+        <img src="assets/img/event2.jpg" alt="معرض">
+        <div class="card-body">
+          <h3>معرض الفنون</h3>
+          <p class="small-note">الأحد 13 أكتوبر • المركز الثقافي</p>
+          <a class="btn-primary" href="event.html">التفاصيل</a>
+        </div>
+      </div>
+      <div class="card event-card" data-cat="رياضة">
+        <img src="assets/img/event3.jpg" alt="سباق">
+        <div class="card-body">
+          <h3>سباق السيارات السنوي</h3>
+          <p class="small-note">الجمعة 11 أكتوبر • حلبة المدينة</p>
+          <a class="btn-primary" href="event.html">التفاصيل</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="my-4 participants">
+    <h3>المشاركون في المشروع</h3>
+    <p>anwar_289411<br/>enas_297602<br/>Ramiz_279484<br/>baraa_249843</p>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container">
+    جميع الحقوق محفوظة © 2025 - دليل فعاليات المدينة
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
