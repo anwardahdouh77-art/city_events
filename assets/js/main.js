@@ -30,82 +30,50 @@ function filterByCategory(cat){
   });
 }
 
-(function(){
-  // ===== ترجمات مبدئية: أضف/عدّل المفاتيح حسب الحاجة =====
-  const translations = {
-    ar: {
-      "site.title": "دليل فعاليات المدينة",
-      "nav.home": "الرئيسية",
-      "nav.events": "الفعاليات",
-      "nav.about": "عن الدليل",
-      "nav.contact": "اتصل بنا",
-      "hero.title": "اكتشف فعاليات مدينتك",
-      "hero.subtitle": "تعرّف على أحدث الفعاليات المحلية",
-      "button.contact": "تواصل معنا",
-      // أضف مفاتيح إضافية كما سنشرح أدناه...
-    },
-    en: {
-      "site.title": "City Events Guide",
-      "nav.home": "Home",
-      "nav.events": "Events",
-      "nav.about": "About",
-      "nav.contact": "Contact",
-      "hero.title": "Discover events in your city",
-      "hero.subtitle": "Find the latest local events",
-      "button.contact": "Contact Us",
-      // Add more keys...
-    }
-  };
+// 🌍 Language & Theme Switcher Logic
 
-  // عناصر الأعلام — تأكد أن هذه الـ IDs موجودة في HTML (سأشرح أين تضيفها)
-  const flagAr = document.getElementById('flag-ar');
-  const flagEn = document.getElementById('flag-en');
+// === تبديل الوضع الليلي ===
+const themeBtn = document.getElementById('theme-toggle');
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  });
+}
 
-  // language persisted in localStorage (default = 'ar')
-  const savedLang = localStorage.getItem('site_lang') || 'ar';
+// === تبديل اللغة ===
+const flagAR = document.getElementById('flag-ar');
+const flagEN = document.getElementById('flag-en');
 
-  // apply saved language on load
-  applyLanguage(savedLang);
-
-  // event listeners (only if elements exist)
-  if(flagAr) flagAr.addEventListener('click', () => { localStorage.setItem('site_lang','ar'); applyLanguage('ar'); });
-  if(flagEn) flagEn.addEventListener('click', () => { localStorage.setItem('site_lang','en'); applyLanguage('en'); });
-
-  // Main function: find elements with data-translate and replace text
-  function applyLanguage(lang){
-    // set html lang and direction
-    document.documentElement.lang = (lang === 'ar') ? 'ar' : 'en';
-    document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-
-    // change text for elements that have data-translate attribute
-    document.querySelectorAll('[data-translate]').forEach(el => {
-      const key = el.getAttribute('data-translate');
-      if(!key) return;
-      const dict = translations[lang];
-      if(!dict) return;
-      // Inputs & textareas -> change placeholder if key exists, else change value for buttons/inputs
-      const tag = el.tagName.toLowerCase();
-      if(tag === 'input' || tag === 'textarea'){
-        if(dict[key]) el.placeholder = dict[key];
-      } else if(tag === 'img'){
-        // لو أردت تغيير صور حسب اللغة، ضع src في data-src-ar / data-src-en
-        const src = el.getAttribute(`data-src-${lang}`);
-        if(src) el.src = src;
-      } else {
-        if(dict[key]) el.textContent = dict[key];
-      }
-    });
-
-    // (اختياري) تحديث عناصر title/alt المساعدة
-    document.querySelectorAll('[data-title]').forEach(el=>{
-      const key = el.getAttribute('data-title');
-      const dict = translations[lang];
-      if(dict && dict[key]) el.title = dict[key];
-    });
+// النصوص القابلة للترجمة
+const translations = {
+  ar: {
+    "Home": "الرئيسية",
+    "About": "من نحن",
+    "Contact": "اتصل بنا",
+    "Events": "الفعاليات",
+    "Read More": "اقرأ المزيد",
+  },
+  en: {
+    "الرئيسية": "Home",
+    "من نحن": "About",
+    "اتصل بنا": "Contact",
+    "الفعاليات": "Events",
+    "اقرأ المزيد": "Read More",
   }
+};
 
-  // expose for debugging/testing
-  window._siteTranslations = translations;
-  window._applyLanguage = applyLanguage;
-})();
+// دالة تبديل اللغة
+function switchLanguage(lang) {
+  document.querySelectorAll('*').forEach(el => {
+    if (translations[lang][el.textContent]) {
+      el.textContent = translations[lang][el.textContent];
+    }
+  });
+  document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+}
 
+if (flagAR && flagEN) {
+  flagAR.addEventListener('click', () => switchLanguage('ar'));
+  flagEN.addEventListener('click', () => switchLanguage('en'));
+}
