@@ -11,7 +11,7 @@ function validateContactForm(){
     alertBox.innerText = 'يرجى تعبئة جميع الحقول.';
     return false;
   }
-  const re = /^\S+@\S+\.\S+$/;
+
   if(!re.test(email)){
     alertBox.className = 'alert alert-danger mt-3';
     alertBox.innerText = 'صيغة البريد الإلكتروني غير صحيحة.';
@@ -45,7 +45,7 @@ if (themeBtn) {
 const flagAR = document.getElementById('flag-ar');
 const flagEN = document.getElementById('flag-en');
 
-// النصوص القابلة للترجمة
+
 const translations = {
   ar: {
     "Home": "الرئيسية",
